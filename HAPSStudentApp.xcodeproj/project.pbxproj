@@ -134,6 +134,8 @@
 		21F42A7A2A64FBA900D5276A /* PocketMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F42A792A64FBA900D5276A /* PocketMoneyVC.swift */; };
 		720D369DD26DB7056AEBEB8A /* Pods_HAPSStudentApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2947D14DD42AEB020F7AF7 /* Pods_HAPSStudentApp.framework */; };
 		B51E6B7B2DA7DACC00E8A57A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B51E6B7A2DA7DACC00E8A57A /* GoogleService-Info.plist */; };
+		B52A13FC2DDAE9490005DCCF /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A13FB2DDAE9490005DCCF /* ChangePasswordVC.swift */; };
+		B52A13FE2DDB0C3B0005DCCF /* TimeTableWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A13FD2DDB0C3B0005DCCF /* TimeTableWebVC.swift */; };
 		B52B967E2C2D416300E877F7 /* NewsFeedImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52B967D2C2D416300E877F7 /* NewsFeedImageCollectionCell.swift */; };
 		B550F49E2C2AD0D9008CEF73 /* NewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F49D2C2AD0D9008CEF73 /* NewsFeedVC.swift */; };
 		B5851EC72C3E50EF00D82F8B /* NewsFeedDetailImgTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5851EC62C3E50EF00D82F8B /* NewsFeedDetailImgTblCell.swift */; };
@@ -147,7 +149,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAPSStudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RKCStudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21133CB32A431CCD00D5AE82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21133CB52A431CCD00D5AE82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		21133CBA2A431CCD00D5AE82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -277,6 +279,8 @@
 		8F2947D14DD42AEB020F7AF7 /* Pods_HAPSStudentApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HAPSStudentApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABF4DC72AC43E4663DCA01F /* Pods-HAPSStudentApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HAPSStudentApp.release.xcconfig"; path = "Target Support Files/Pods-HAPSStudentApp/Pods-HAPSStudentApp.release.xcconfig"; sourceTree = "<group>"; };
 		B51E6B7A2DA7DACC00E8A57A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B52A13FB2DDAE9490005DCCF /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		B52A13FD2DDB0C3B0005DCCF /* TimeTableWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableWebVC.swift; sourceTree = "<group>"; };
 		B52B967D2C2D416300E877F7 /* NewsFeedImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedImageCollectionCell.swift; sourceTree = "<group>"; };
 		B550F49D2C2AD0D9008CEF73 /* NewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedVC.swift; sourceTree = "<group>"; };
 		B5851EC62C3E50EF00D82F8B /* NewsFeedDetailImgTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedDetailImgTblCell.swift; sourceTree = "<group>"; };
@@ -324,7 +328,7 @@
 		21133CB12A431CCD00D5AE82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */,
+				21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -507,6 +511,8 @@
 				216EA0AE2B3BE48600E6DC39 /* ApplyGatePassVC.swift */,
 				216C887A2B3BF4D400924458 /* GatePassStatusVC.swift */,
 				21C6A3A82B3EABD200288D3F /* ListAppearVC.swift */,
+				B52A13FB2DDAE9490005DCCF /* ChangePasswordVC.swift */,
+				B52A13FD2DDB0C3B0005DCCF /* TimeTableWebVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -724,9 +730,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21133CAF2A431CCD00D5AE82 /* HAPSStudentApp */ = {
+		21133CAF2A431CCD00D5AE82 /* RKCStudentApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "HAPSStudentApp" */;
+			buildConfigurationList = 21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "RKCStudentApp" */;
 			buildPhases = (
 				535E7FFB04A74057DEC3CB8B /* [CP] Check Pods Manifest.lock */,
 				21133CAC2A431CCD00D5AE82 /* Sources */,
@@ -739,9 +745,9 @@
 			);
 			dependencies = (
 			);
-			name = HAPSStudentApp;
+			name = RKCStudentApp;
 			productName = HAPSStudentApp;
-			productReference = 21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */;
+			productReference = 21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -759,7 +765,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "HAPSStudentApp" */;
+			buildConfigurationList = 21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "RKCStudentApp" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -772,7 +778,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21133CAF2A431CCD00D5AE82 /* HAPSStudentApp */,
+				21133CAF2A431CCD00D5AE82 /* RKCStudentApp */,
 			);
 		};
 /* End PBXProject section */
@@ -891,6 +897,7 @@
 				21B786A32B64BE7D00028DFA /* DashboardItems.swift in Sources */,
 				211A768B2A57CF8E001D0ABC /* FeedbackListTblVCell.swift in Sources */,
 				21713BC12A53E9AF00C24F55 /* StudentInboxDetailVC.swift in Sources */,
+				B52A13FE2DDB0C3B0005DCCF /* TimeTableWebVC.swift in Sources */,
 				211A76912A581896001D0ABC /* FeeLedgerTblVCell.swift in Sources */,
 				21A3AF112A5BF85D00632DAF /* MoreNewsTblVCell.swift in Sources */,
 				21B8EF6F2A725219004F78B9 /* FeedbackChatTblVCell.swift in Sources */,
@@ -913,6 +920,7 @@
 				B5BC3CC62C2DB8A00030C342 /* NewsFeedDetailVC.swift in Sources */,
 				211A76972A582B68001D0ABC /* NewsTblVCell.swift in Sources */,
 				216EA0AD2B3BDE6B00E6DC39 /* GatePassSelectionVC.swift in Sources */,
+				B52A13FC2DDAE9490005DCCF /* ChangePasswordVC.swift in Sources */,
 				21AA61CF2A4AE6670018C164 /* LeaveStatusTblViewCell.swift in Sources */,
 				21F3314D2A542CB20086A2CB /* StudentProfileVC.swift in Sources */,
 				21C5BD812A6FA20A0037951D /* ReportCardVC.swift in Sources */,
@@ -1206,7 +1214,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "HAPSStudentApp" */ = {
+		21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "RKCStudentApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21133CC22A431CCF00D5AE82 /* Debug */,
@@ -1215,7 +1223,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "HAPSStudentApp" */ = {
+		21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "RKCStudentApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21133CC52A431CCF00D5AE82 /* Debug */,
