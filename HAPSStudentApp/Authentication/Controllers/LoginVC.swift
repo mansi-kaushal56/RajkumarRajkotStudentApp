@@ -16,8 +16,6 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                usernameTxtFld.text = "123009"
-                passTxtFld.text = "04-01-2012"
 
     }
     @IBAction func loginbtn(_ sender : UIButton) {

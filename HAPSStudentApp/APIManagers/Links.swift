@@ -76,6 +76,7 @@ enum End_Points {
     case Api_News_Feed_Share
     case Api_News_Feed_Like_List
     case Api_News_Feed_Detail
+    case Api_Change_Password
     
 
     var getEndpoints : String {
@@ -155,7 +156,7 @@ enum End_Points {
             case .Api_Periods:
                 return "Periods"
             case .Api_Time_Table:
-                return "newtime_ios"
+                return "Timetablee"
             case .Api_Academic_Calendar_list:
                 return "calendar"
             case .Api_Notifications_Stu:
@@ -220,6 +221,8 @@ enum End_Points {
                 return "newsfeedlikelist"
             case .Api_News_Feed_Detail:
                 return "newsfeeddetail"
+            case .Api_Change_Password:
+                return "changepassword"
             }
         }
     }

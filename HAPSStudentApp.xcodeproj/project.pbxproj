@@ -149,7 +149,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RKCStudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAPSStudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21133CB32A431CCD00D5AE82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21133CB52A431CCD00D5AE82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		21133CBA2A431CCD00D5AE82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 		21133CB12A431CCD00D5AE82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */,
+				21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -730,9 +730,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21133CAF2A431CCD00D5AE82 /* RKCStudentApp */ = {
+		21133CAF2A431CCD00D5AE82 /* HAPSStudentApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "RKCStudentApp" */;
+			buildConfigurationList = 21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "HAPSStudentApp" */;
 			buildPhases = (
 				535E7FFB04A74057DEC3CB8B /* [CP] Check Pods Manifest.lock */,
 				21133CAC2A431CCD00D5AE82 /* Sources */,
@@ -745,9 +745,9 @@
 			);
 			dependencies = (
 			);
-			name = RKCStudentApp;
+			name = HAPSStudentApp;
 			productName = HAPSStudentApp;
-			productReference = 21133CB02A431CCD00D5AE82 /* RKCStudentApp.app */;
+			productReference = 21133CB02A431CCD00D5AE82 /* HAPSStudentApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -765,7 +765,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "RKCStudentApp" */;
+			buildConfigurationList = 21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "HAPSStudentApp" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -778,7 +778,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21133CAF2A431CCD00D5AE82 /* RKCStudentApp */,
+				21133CAF2A431CCD00D5AE82 /* HAPSStudentApp */,
 			);
 		};
 /* End PBXProject section */
@@ -1146,6 +1146,7 @@
 				DEVELOPMENT_TEAM = D6RDR9F6WH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HAPSStudentApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RKCStudent;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The application would like to use a device camera to capture and upload images.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The application would like to use a device camera to capture and upload images.";
@@ -1184,6 +1185,7 @@
 				DEVELOPMENT_TEAM = D6RDR9F6WH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HAPSStudentApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RKCStudent;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The application would like to use a device camera to capture and upload images.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The application would like to use a device camera to capture and upload images.";
@@ -1214,7 +1216,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "RKCStudentApp" */ = {
+		21133CAB2A431CCD00D5AE82 /* Build configuration list for PBXProject "HAPSStudentApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21133CC22A431CCF00D5AE82 /* Debug */,
@@ -1223,7 +1225,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "RKCStudentApp" */ = {
+		21133CC42A431CCF00D5AE82 /* Build configuration list for PBXNativeTarget "HAPSStudentApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21133CC52A431CCF00D5AE82 /* Debug */,

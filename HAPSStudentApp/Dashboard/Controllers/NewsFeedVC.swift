@@ -9,15 +9,19 @@ import UIKit
 import ObjectMapper
 
 class NewsFeedVC: UIViewController {
-
+    
     @IBOutlet weak var newsFeedTblView: UITableView!
     
     var newsFeedListObj : NewsFeedListModel?
+    var shareNewsfeedModel : ShareNewsfeedModel?
+    var shareURL : String?
+    var shareSenderButton: UIButton?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         newsFeedApi()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -40,6 +44,18 @@ class NewsFeedVC: UIViewController {
         vc.id = likeListId
         present(vc, animated: false)
     }
+    @objc func shareBtn(sender: UIButton) {
+        let rowIndex = sender.tag
+        let newsFeed = newsFeedListObj?.response?[rowIndex]
+
+        // Save sender for use after API response
+        self.shareSenderButton = sender
+
+        // Call API
+        newsShareApi(newsFeedId: newsFeed?.id ?? "")
+    }
+
+    
     
     @objc func likeButtonTapped(_ sender: UIButton) {
         let rowIndex = sender.tag
@@ -56,10 +72,7 @@ class NewsFeedVC: UIViewController {
         newsLikeApi(newsFeedId: "\(newsFeedListObj?.response?[rowIndex].id ?? "")")
         
     }
-    private func buildUrlWithParameters(base: String, endpoint: String, parameters: [String: String]) -> String {
-        let urlString = "\(base)\(endpoint).php?"
-        return addParametersToUrl(urlString: urlString, parameters: parameters)
-    }
+   
     private func makeApiRequest(endpoint: String, parameters: [String: String]) {
         CommonObjects.shared.showProgress()
         
@@ -69,27 +82,19 @@ class NewsFeedVC: UIViewController {
         obj.delegate = self
         obj.requestAPI(apiName: endpoint, apiRequestURL: urlString)
     }
-    private func addParametersToUrl(urlString: String, parameters: [String: String]) -> String {
-        var urlWithParams = urlString
-        for (key, value) in parameters {
-            urlWithParams += "\(key)=\(value)&"
-        }
-        // Remove the last '&' character
-        urlWithParams.removeLast()
-        return urlWithParams
-    }
+    
     //Api Calls
-       private func newsFeedApi() {
-           let getUserDetail = UserDefaults.getUserDetail()
-           
-           let parameters: [String: String] = [
-               "BranchId": "\(getUserDetail?.branch_id ?? "")",
-               "Session": "\(getUserDetail?.session_id ?? "")",
-               "enrollno": "\(getUserDetail?.enrollNo ?? "")"
-           ]
-           
-           makeApiRequest(endpoint: End_Points.Api_News_Feed.getEndpoints, parameters: parameters)
-       }
+    private func newsFeedApi() {
+        let getUserDetail = UserDefaults.getUserDetail()
+        
+        let parameters: [String: String] = [
+            "BranchId": "\(getUserDetail?.branch_id ?? "")",
+            "Session": "\(getUserDetail?.session_id ?? "")",
+            "enrollno": "\(getUserDetail?.enrollNo ?? "")"
+        ]
+        
+        makeApiRequest(endpoint: End_Points.Api_News_Feed.getEndpoints, parameters: parameters)
+    }
     private func newsLikeApi(newsFeedId: String) {
         let getUserDetail = UserDefaults.getUserDetail()
         let parameters: [String: String] = [
@@ -109,22 +114,7 @@ class NewsFeedVC: UIViewController {
         
         makeApiRequest(endpoint: End_Points.Api_News_Feed_Share.getEndpoints, parameters: parameters)
     }
-    func processHTMLString(_ htmlString: String) -> NSAttributedString {
-        do {
-            guard let data = htmlString.data(using: .utf8) else {
-                return NSAttributedString()
-            }
-            
-            let attributedString = try NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-            
-            // Optionally, you can apply additional styling or modifications here
-            
-            return attributedString
-        } catch {
-            print("Error converting HTML string to attributed string: \(error.localizedDescription)")
-            return NSAttributedString()
-        }
-    }
+    
 }
 extension NewsFeedVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -151,21 +141,23 @@ extension NewsFeedVC: UITableViewDelegate, UITableViewDataSource {
         
         newsFeedCell.dateLabel.text = newsFeed?.newsFeedDate
         if let likeStatus = newsFeed?.like {
-               if likeStatus == "Yes" {
-                   newsFeedCell.likeBtnTapped.setImage(UIImage(named: "ic_likePostSelection"), for: .normal)
-               } else {
-                   newsFeedCell.likeBtnTapped.setImage(UIImage(named: "ic_like"), for: .normal)
-               }
-           } else {
-               // Handle default case if necessary
-           }
+            if likeStatus == "Yes" {
+                newsFeedCell.likeBtnTapped.setImage(UIImage(named: "ic_likePostSelection"), for: .normal)
+            } else {
+                newsFeedCell.likeBtnTapped.setImage(UIImage(named: "ic_like"), for: .normal)
+            }
+        } else {
+            // Handle default case if necessary
+        }
         
         newsFeedCell.likeBtnTapped.addTarget(self, action: #selector(likeButtonTapped(_:)), for: .touchUpInside)
         //newsFeedCell.imageCollectionView.reloadData()
         newsFeedCell.likeBtn.tag = indexPath.row
-//        newsFeedCell.likeBtn.addTarget(self, action: #selector(likeBtnList), for: .touchUpInside)
+        newsFeedCell.sahreBtnTapped.tag = indexPath.row
+        //        newsFeedCell.likeBtn.addTarget(self, action: #selector(likeBtnList), for: .touchUpInside)
         newsFeedCell.likeBtn.addTarget(self, action: #selector(likeBtnList(sender:)), for: .touchUpInside)
-    
+        newsFeedCell.sahreBtnTapped.addTarget(self, action: #selector(shareBtn(sender:)), for: .touchUpInside)
+        
         return newsFeedCell
     }
     
@@ -191,13 +183,44 @@ extension NewsFeedVC: RequestApiDelegate {
                 }
             }
         }
+        if api == End_Points.Api_News_Feed_Share.getEndpoints {
+            let status = response["status"] as? Int
+            CommonObjects.shared.stopProgress()
+
+            if status == 1 {
+                if let newsFeedModelDictData = Mapper<ShareNewsfeedModel>().map(JSONObject: response) {
+                    shareNewsfeedModel = newsFeedModelDictData
+                    shareURL = shareNewsfeedModel?.weburl
+
+                    DispatchQueue.main.async {
+                        if let urlString = self.shareURL, let url = URL(string: urlString) {
+                            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+
+                            if let sender = self.shareSenderButton {
+                                activityVC.popoverPresentationController?.sourceView = sender
+                            }
+
+                            self.present(activityVC, animated: true)
+                            print("weburl: \(urlString)")
+                        }
+
+                    }
+                    // Reset sender after use
+                    self.shareSenderButton = nil
+                }
+            } else {
+                DispatchQueue.main.async {
+                    CommonObjects.shared.showToast(message: AppMessages.MSG_NO_DATA_FOUND, controller: self)
+                }
+            }
+        }
+
+        
         if api == End_Points.Api_News_Feed_Like.getEndpoints {
             let status = response["status"] as? Int
             if status == 1 {
                 newsFeedApi()
-//                DispatchQueue.main.async {
-//                    self.newsFeedTblView.reloadData()
-//                }
+               
                 CommonObjects.shared.stopProgress()
             }
         }

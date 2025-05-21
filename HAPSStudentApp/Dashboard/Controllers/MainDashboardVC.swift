@@ -147,9 +147,9 @@ class MainDashboardVC: UIViewController {
     private func setupProfileButton() -> UIBarButtonItem {
         let profileImageView = UIImageView()
         setUpImage(image: UserDefaults.getUserDetail()?.studentImage ?? "", imageView: profileImageView)
+
         profileImageView.contentMode = .scaleToFill
         profileImageView.backgroundColor = .white
-        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
         // Making the image view circular

@@ -178,6 +178,7 @@ extension TimeTableVC {
     func  periodsAPI() {
         CommonObjects.shared.stopProgress()
         let strUrl = "\(Base_Url)\(End_Points.Api_Periods.getEndpoints).php?section=\(UserDefaults.getUserDetail()?.section_id ?? "")&BranchId=\(UserDefaults.getUserDetail()?.branch_id ?? "")&session=\(UserDefaults.getUserDetail()?.session_id ?? "")"
+        print("Period api is \(strUrl)")
         let obj = ApiRequest()
         obj.delegate = self
         obj.requestAPI(apiName: End_Points.Api_Periods.getEndpoints, apiRequestURL: strUrl)
@@ -185,6 +186,7 @@ extension TimeTableVC {
     func  timeTableApi() {
         CommonObjects.shared.showProgress()
         let strUrl = "\(Base_Url)\(End_Points.Api_Time_Table.getEndpoints).php?section=\(UserDefaults.getUserDetail()?.section_id ?? "")&BranchId=\(UserDefaults.getUserDetail()?.branch_id ?? "")&session=\(UserDefaults.getUserDetail()?.session_id ?? "")&class=\(UserDefaults.getUserDetail()?.class_id ?? "")"
+        print("Time table api is \(strUrl)")
         let obj = ApiRequest()
         obj.delegate = self
         obj.requestAPI(apiName: End_Points.Api_Time_Table.getEndpoints, apiRequestURL: strUrl)

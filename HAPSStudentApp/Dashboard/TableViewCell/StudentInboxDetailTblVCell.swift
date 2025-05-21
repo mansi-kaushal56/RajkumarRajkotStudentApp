@@ -8,6 +8,7 @@
 import UIKit
 
 class StudentInboxDetailTblVCell: UITableViewCell {
+    @IBOutlet weak var attachmentView: UIView!
     @IBOutlet weak var despLbl : UILabel!
     @IBOutlet weak var dateLbl : UILabel!
     @IBOutlet weak var schoolLbl : UILabel!

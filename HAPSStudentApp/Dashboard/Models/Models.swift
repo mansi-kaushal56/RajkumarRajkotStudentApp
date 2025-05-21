@@ -1277,6 +1277,19 @@ struct GatePassStatusRest : Mappable {
     }
 }
 //Vijay End ------
+struct ShareNewsfeedModel : Mappable {
+    var totalShare, weburl : String?
+
+    init?(map: Map) {}
+
+    mutating func mapping(map: Map) {
+
+        totalShare <- map["totalShare"]
+        weburl <- map["weburl"]
+        
+    }
+}
+
 
 //MARK: 27 JUN 2024 Newsfeed Api Model
 
@@ -1304,6 +1317,28 @@ struct NewsFeedResponse : Mappable {
         image3 <- map["image3"]
         image4 <- map["image4"]
         
+    }
+}
+
+//MARK: Newsfeed Detail
+struct NewsFeedDetailModel : Mappable {
+    var images : [Images]?
+
+    init?(map: Map) {}
+
+    mutating func mapping(map: Map) {
+        images <- map["images"]
+    }
+
+}
+struct Images : Mappable {
+    var image : String?
+
+    init?(map: Map) {}
+
+    mutating func mapping(map: Map) {
+
+        image <- map["image"]
     }
 }
 //MARK: 28 JUN 2024 Like List Api Model

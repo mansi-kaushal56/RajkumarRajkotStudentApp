@@ -35,6 +35,23 @@ extension UIViewController: UIImagePickerControllerDelegate, UINavigationControl
         labelsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         labelsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
+    func setUpDefaultImage(image urlString: String, imageView: UIImageView) {
+        let placeholder = UIImage(named: "defaultimage") // Make sure this is in Assets
+        
+        if let url = URL(string: urlString), !urlString.isEmpty {
+            imageView.kf.setImage(
+                with: url,
+                placeholder: placeholder,
+                options: [
+                    .transition(.fade(0.2)),
+                    .cacheOriginalImage
+                ]
+            )
+        } else {
+            imageView.image = placeholder
+        }
+    }
+
     //    func barBtns(){
     //        let notificationBtn = UIBarButtonItem(image: UIImage(named: "logoutIcon"), style: .plain, target: self, action: #selector(logoutBtnTapped))
     //        navigationItem.rightBarButtonItem = notificationBtn
@@ -200,6 +217,40 @@ extension UIViewController: UIImagePickerControllerDelegate, UINavigationControl
         self.addChild(viewController)
         viewController.didMove(toParent: self)
     }
+    func processHTMLString(_ htmlString: String) -> NSAttributedString {
+        do {
+            guard let data = htmlString.data(using: .utf8) else {
+                return NSAttributedString()
+            }
+            let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+                    .documentType: NSAttributedString.DocumentType.html,
+                    .characterEncoding: String.Encoding.utf8.rawValue
+                ]
+            
+            let attributedString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
+            
+            // Optionally, you can apply additional styling or modifications here
+            
+            return attributedString
+        } catch {
+            print("Error converting HTML string to attributed string: \(error.localizedDescription)")
+            return NSAttributedString()
+        }
+    }
+    func buildUrlWithParameters(base: String, endpoint: String, parameters: [String: String]) -> String {
+        let urlString = "\(base)\(endpoint).php?"
+        return addParametersToUrl(urlString: urlString, parameters: parameters)
+    }
+    func addParametersToUrl(urlString: String, parameters: [String: String]) -> String {
+        var urlWithParams = urlString
+        for (key, value) in parameters {
+            urlWithParams += "\(key)=\(value)&"
+        }
+        // Remove the last '&' character
+        urlWithParams.removeLast()
+        return urlWithParams
+    }
+    
 }
 extension Notification.Name {
     static let passNextVC = Notification.Name("passNextVC")

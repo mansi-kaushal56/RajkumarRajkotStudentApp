@@ -30,7 +30,9 @@ class LikeListViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFullScreenViewTapGestue))
         self.fullScreenView.addGestureRecognizer(tapGesture)
     }
-    
+    @objc func backBtnTap(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
+    }
     
     
     @objc private func handleFullScreenViewTapGestue() {
@@ -50,6 +52,26 @@ extension LikeListViewController: UITableViewDelegate, UITableViewDataSource {
         likeListCell.studentClassRollNo.text = "Enroll No. \(obj?.EntrollNo ?? "") || Class: \(obj?.ClassName ?? "")-\(obj?.SectionName ?? "")"
         return likeListCell
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .white
+        headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30)
+
+        // Create a UIButton instead of UIBarButtonItem
+        let backButton = UIButton(type: .system)
+        backButton.frame = CGRect(x: 16, y: 15, width: 30, height: 30)
+        backButton.setImage(UIImage(named: "cross_icon"), for: .normal)
+        backButton.tintColor = .black
+        backButton.addTarget(self, action: #selector(backBtnTap), for: .touchUpInside)
+
+        headerView.addSubview(backButton)
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55
+    }
+
     
     
 }
@@ -73,7 +95,7 @@ extension LikeListViewController: RequestApiDelegate {
                             self.likeListTblView.reloadData()
                             self.updateTableContentInset()
                             let rows = self.likeListTblView.numberOfRows(inSection: 0)
-                            self.tblLikeListHeightConstraint.constant = CGFloat(72 * CGFloat(rows))
+                            self.tblLikeListHeightConstraint.constant = CGFloat(72 * CGFloat(rows) + 72)
                             self.view.layoutIfNeeded()
                         }
                     }

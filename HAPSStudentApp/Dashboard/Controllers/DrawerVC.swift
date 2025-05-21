@@ -22,15 +22,16 @@ class DrawerVC: UIViewController {
         DrawerItems(id: "1", title: "My Profile", image: "studentprofile"),
         DrawerItems(id: "2", title: "Inbox", image: "inbox"),
         DrawerItems(id: "3", title: "Notice Board/Circular", image: "notice"),
-        DrawerItems(id: "4", title: "Home Work", image: "homework"),
+//        DrawerItems(id: "4", title: "Home Work", image: "homework"),
         DrawerItems(id: "5", title: "Attendance", image: "attendance"),
-        DrawerItems(id: "6", title: "Request for Leave", image: "leave"),
+//        DrawerItems(id: "6", title: "Request for Leave", image: "leave"),
         DrawerItems(id: "7", title: "Fee Ledger", image: "feeledger"),
         DrawerItems(id: "8", title: "Time Table", image: "timetable"),
-        DrawerItems(id: "9", title: "Gallery", image: "gallery"),
-        DrawerItems(id: "10", title: "Feedback/Suggestions", image: "feedback"),
+//        DrawerItems(id: "9", title: "Gallery", image: "gallery"),
+//        DrawerItems(id: "10", title: "Feedback/Suggestions", image: "feedback"),
         DrawerItems(id: "11", title: "Discipline", image: "discipline"),
-        DrawerItems(id: "12", title: "News", image: "news")
+        DrawerItems(id: "12", title: "News", image: "news"),
+        DrawerItems(id: "13", title: "Change Password", image: "gallery")
     ]
     
     
@@ -65,24 +66,26 @@ extension DrawerVC : UITableViewDelegate {
             performSegue(withIdentifier:AppSegue.studentInboxSegue.getDescription, sender: nil)
         case "3":
             performSegue(withIdentifier:AppSegue.noticeSegue.getDescription, sender: nil)
-        case "4":
-            performSegue(withIdentifier: AppSegue.homeWorkSegue.getDescription, sender: nil)
+//        case "4":
+//            performSegue(withIdentifier: AppSegue.homeWorkSegue.getDescription, sender: nil)
         case "5":
             performSegue(withIdentifier: AppSegue.attendanceSegue.getDescription, sender: nil)
-        case "6":
-            performSegue(withIdentifier:AppSegue.leaveRequestSegue.getDescription, sender: nil)
+//        case "6":
+//            performSegue(withIdentifier:AppSegue.leaveRequestSegue.getDescription, sender: nil)
         case "7":
             performSegue(withIdentifier:AppSegue.feeLedgerSegue.getDescription, sender: nil)
         case "8":
             performSegue(withIdentifier:AppSegue.timeTableSegue.getDescription, sender: nil)
-        case "9":
-            performSegue(withIdentifier:AppSegue.studentGallerySegue.getDescription, sender: nil)
-        case "10":
-            performSegue(withIdentifier:AppSegue.feedbackSuggestionSegue.getDescription, sender: nil)
+//        case "9":
+//            performSegue(withIdentifier:AppSegue.studentGallerySegue.getDescription, sender: nil)
+//        case "10":
+//            performSegue(withIdentifier:AppSegue.feedbackSuggestionSegue.getDescription, sender: nil)
         case "11":
             performSegue(withIdentifier:AppSegue.disciplineSegue.getDescription, sender: nil)
         case "12":
             performSegue(withIdentifier:AppSegue.newsSegue.getDescription, sender: nil)
+        case "13":
+            performSegue(withIdentifier: AppSegue.changePswdSegue.getDescription, sender: nil)
             
         default:
             break

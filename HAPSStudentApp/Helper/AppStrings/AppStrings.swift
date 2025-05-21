@@ -181,6 +181,7 @@ enum AppSegue {
     case studentDashboardSegue
     case newsFeedCellSegue
     case likeListSegue
+    case changePswdSegue
     var getDescription:String {
         get {
             switch self {
@@ -302,6 +303,8 @@ enum AppSegue {
                 return "newsFeedCellSegue"
             case .likeListSegue:
                 return "likeListSegue"
+            case .changePswdSegue:
+                return "changePswdSegue"
             }
             
         }

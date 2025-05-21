@@ -15,7 +15,9 @@ class NoticeTblViewCell: UITableViewCell {
     @IBOutlet weak var viewCircularView: UIView!
     @IBOutlet weak var viewAttachmentView: UIView!
     
-   // viewCircularView
+    @IBOutlet weak var descriptionLbl: UILabel!
+    @IBOutlet weak var circularStackView: UIStackView!
+    // viewCircularView
     
 
     override func awakeFromNib() {

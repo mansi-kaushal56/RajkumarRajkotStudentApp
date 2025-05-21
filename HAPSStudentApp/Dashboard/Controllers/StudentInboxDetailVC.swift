@@ -19,6 +19,26 @@ class StudentInboxDetailVC: UIViewController {
         studentInboxDetailAPI()
         
     }
+    @objc func viewAttachment(sender:UITapGestureRecognizer) {
+        switch studentInboxDetailObj?.studentInboxDetailArr?[sender.view?.tag ?? 0].fileType {
+        case ImageType.pdf:
+            openWebView(urlSting: studentInboxDetailObj?.studentInboxDetailArr?[sender.view?.tag ?? 0].file ?? "", viewController: self)
+        case ImageType.jpeg:
+            let storyboard = UIStoryboard(name: AppStoryboards.dashboard.getDescription, bundle: .main)
+            if let showImgVc = storyboard.instantiateViewController(withIdentifier: AppViewControllerID.showImgVC.getIdentifier) as? ShowImgVC {
+                showImgVc.image = studentInboxDetailObj?.studentInboxDetailArr?[sender.view?.tag ?? 0].file
+                present(showImgVc, animated: true)
+            }
+        default:
+            let storyboard = UIStoryboard(name: AppStoryboards.dashboard.getDescription, bundle: .main)
+            if let showImgVc = storyboard.instantiateViewController(withIdentifier: AppViewControllerID.showImgVC.getIdentifier) as? ShowImgVC {
+                showImgVc.image = studentInboxDetailObj?.studentInboxDetailArr?[sender.view?.tag ?? 0].file
+                present(showImgVc, animated: true)
+            }
+            break
+        }
+        
+    }
 }
 extension StudentInboxDetailVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,9 +50,12 @@ extension StudentInboxDetailVC : UITableViewDataSource, UITableViewDelegate {
         inboxDetailCell.dateLbl.text = studentInboxDetailObj?.studentInboxDetailArr?[indexPath.row].date
         inboxDetailCell.despLbl.text = studentInboxDetailObj?.studentInboxDetailArr?[indexPath.row].desp
         inboxDetailCell.schoolLbl.text = studentInboxDetailObj?.studentInboxDetailArr?[indexPath.row].school
-        let img = (studentInboxDetailObj?.studentInboxDetailArr?[indexPath.row].file ?? "")
-        let imgurl = URL(string: img)
-        inboxDetailCell.msgImg.kf.setImage(with: imgurl,placeholder: UIImage.userIcon)
+        inboxDetailCell.attachmentView.tag = indexPath.row
+        
+        let attachmentTap = UITapGestureRecognizer(target: self, action: #selector(viewAttachment(sender: )))
+        inboxDetailCell.attachmentView.addGestureRecognizer(attachmentTap)
+        
+        
         return inboxDetailCell
     }
     

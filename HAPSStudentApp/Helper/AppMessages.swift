@@ -27,6 +27,7 @@ class AppMessages {
     static let MSG_TIME_OUT = "The request timed out."
     static let MSG_MESSAGE_EMPTY = "Please enter the message."
     static let MSG_LOGOUT = "Are you sure, you want to Logout?"
+    static let MSG_CHANGE_PSWD = "Are you sure, you want to change your password?"
     
     //29, Dec 2023 - Apply gate pass validation messages.
     static let MSG_DateOfReturnEmpty = "Please enter the date of return. "
@@ -34,5 +35,6 @@ class AppMessages {
     static let MSG_ReasonForLeaveEmpty = "Select the reason for leave."
     static let MSG_AccompaniedEmpty = "Select the accompanied with."
     static let MSG_Gate_Pass_Request = "Gate pass request is submitted successfully"
+    static let MSG_EMPTY_Field = "Please enter all the fields."
     //End
 }

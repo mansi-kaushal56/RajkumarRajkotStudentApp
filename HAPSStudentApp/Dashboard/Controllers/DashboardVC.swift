@@ -72,27 +72,27 @@ extension DashboardVC : UICollectionViewDelegate {
             performSegue(withIdentifier: AppSegue.attendanceSegue.getDescription, sender: nil)
         case "4":
             performSegue(withIdentifier: AppSegue.homeWorkSegue.getDescription, sender: nil)
-        case "5":
-            performSegue(withIdentifier: AppSegue.assignmentsSegue.getDescription, sender: nil)
+//        case "5":
+//            performSegue(withIdentifier: AppSegue.assignmentsSegue.getDescription, sender: nil)
         case "6":
             performSegue(withIdentifier: AppSegue.timeTableSegue.getDescription, sender: nil)
-        case "7":
-            performSegue(withIdentifier: AppSegue.leaveRequestSegue.getDescription, sender: nil)
-        case "8":
-            performSegue(withIdentifier: AppSegue.leaveStatusSegue.getDescription, sender: nil)
+//        case "7":
+//            performSegue(withIdentifier: AppSegue.leaveRequestSegue.getDescription, sender: nil)
+//        case "8":
+//            performSegue(withIdentifier: AppSegue.leaveStatusSegue.getDescription, sender: nil)
         case "9":
             performSegue(withIdentifier: AppSegue.resultSegue.getDescription, sender: nil)
         case "10":
             performSegue(withIdentifier: AppSegue.reportCardSegue.getDescription, sender: nil)
-        case "11":
-            performSegue(withIdentifier: AppSegue.feedbackSuggestionSegue.getDescription, sender: nil)
-        case "12":
-            
-            wedsiteurl = "https://www.dukeinfosys.com/rajkumar/student/"
-            print(wedsiteurl ?? "")
-            openWebView(urlSting:wedsiteurl ?? "" , viewController: self)
-        case "13":
-            performSegue(withIdentifier: AppSegue.feeLedgerSegue.getDescription, sender: nil)
+//        case "11":
+//            performSegue(withIdentifier: AppSegue.feedbackSuggestionSegue.getDescription, sender: nil)
+//        case "12":
+//
+//            wedsiteurl = "https://www.dukeinfosys.com/rajkumar/student/"
+//            print(wedsiteurl ?? "")
+//            openWebView(urlSting:wedsiteurl ?? "" , viewController: self)
+//        case "13":
+//            performSegue(withIdentifier: AppSegue.feeLedgerSegue.getDescription, sender: nil)
         case "14":
             performSegue(withIdentifier: AppSegue.studentPortfolioSegue.getDescription, sender: nil)
         case "15":
@@ -119,16 +119,16 @@ extension DashboardVC : UICollectionViewDelegate {
 //            }
         case "21":
             performSegue(withIdentifier: AppSegue.newsSegue.getDescription, sender: nil)
-        case "22":
-            performSegue(withIdentifier: AppSegue.pocketMoneySegue.getDescription, sender: nil)
+//        case "22":
+//            performSegue(withIdentifier: AppSegue.pocketMoneySegue.getDescription, sender: nil)
         case "23":
             performSegue(withIdentifier: AppSegue.academicCalenderSegue.getDescription, sender: indexPath.row)
         case "24":
             performSegue(withIdentifier: AppSegue.bookListSegue.getDescription, sender: indexPath.row)
         case "25":
             performSegue(withIdentifier: AppSegue.classGallerySegue.getDescription, sender: indexPath.row)
-        case "26":
-            performSegue(withIdentifier: AppSegue.gatePassSegue.getDescription, sender: nil)
+//        case "26":
+//            performSegue(withIdentifier: AppSegue.gatePassSegue.getDescription, sender: nil)
             
         default:
             break

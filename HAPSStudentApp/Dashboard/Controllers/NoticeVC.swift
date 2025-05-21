@@ -31,7 +31,11 @@ class NoticeVC: UIViewController {
     //        openWebView(urlSting: circularObj?.circularArr?[sender.view?.tag ?? 0].file ?? "", viewController: self)
     //    }
     @objc func viewCircular(sender:UITapGestureRecognizer) {
-        performSegue(withIdentifier: AppSegue.webViewSegue.getDescription, sender: sender.view?.tag)
+        let storyboard = UIStoryboard(name: AppStoryboards.dashboard.getDescription, bundle: .main)
+        if let showImgVc = storyboard.instantiateViewController(withIdentifier: AppViewControllerID.showImgVC.getIdentifier) as? ShowImgVC {
+            showImgVc.image = circularObj?.circularArr?[sender.view?.tag ?? 0].file
+            present(showImgVc, animated: true)
+        }
     }
     @objc func viewAttachment(sender:UITapGestureRecognizer) {
         openWebView(urlSting: circularObj?.circularArr?[sender.view?.tag ?? 0].file ?? "", viewController: self)
@@ -47,13 +51,20 @@ extension NoticeVC : UITableViewDataSource {
         let noticeCell = tableView.dequeueReusableCell(withIdentifier: AppTblCells.noticeCell.getIdentifier, for: indexPath) as! NoticeTblViewCell
         noticeCell.dateLbl.text = circularObj?.circularArr?[indexPath.row].date
         noticeCell.titleLbl.text = circularObj?.circularArr?[indexPath.row].title
+        let htmlString = circularObj?.circularArr?[indexPath.row].description ?? ""
+        let processedText = processHTMLString(htmlString)
+        
+        noticeCell.descriptionLbl.attributedText = processedText
         switch circularObj?.circularArr?[indexPath.row].filetype {
         case ImageType.pdf:
             noticeCell.attachmentsStackView.isHidden = false
+            noticeCell.circularStackView.isHidden = true
         case ImageType.jpeg:
-            noticeCell.attachmentsStackView.isHidden = false
+            noticeCell.circularStackView.isHidden = false
+            noticeCell.attachmentsStackView.isHidden = true
         default:
             noticeCell.attachmentsStackView.isHidden = true
+            noticeCell.circularStackView.isHidden = true
             break
         }
         noticeCell.viewCircularView.tag = indexPath.row

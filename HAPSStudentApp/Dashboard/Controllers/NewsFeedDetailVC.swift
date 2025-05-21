@@ -7,52 +7,103 @@
 
 import UIKit
 import Kingfisher
+import ObjectMapper
 
 class NewsFeedDetailVC: UIViewController {
 
+    @IBOutlet weak var newsFeedDescription: UILabel!
+    @IBOutlet weak var newsFeedDate: UILabel!
     @IBOutlet weak var imageTableView: UITableView!
     var detailData: NewsFeedResponse?
-    var newsfeedData: NewsFeedListModel?
+    var newsFeedDetailObj: NewsFeedDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         backBtn(title: "Newsfeed")
+        newsFeedDetailApi(newsFeedId: detailData?.id ?? "")
+        
         
         // Do any additional setup after loading the view.
     }
-    func processHTMLString(_ htmlString: String) -> NSAttributedString {
-        do {
-            guard let data = htmlString.data(using: .utf8) else {
-                return NSAttributedString()
-            }
-            
-            let attributedString = try NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-            
-            // Optionally, you can apply additional styling or modifications here
-            
-            return attributedString
-        } catch {
-            print("Error converting HTML string to attributed string: \(error.localizedDescription)")
-            return NSAttributedString()
+    private func makeApiRequest(endpoint: String, parameters: [String: String]) {
+        CommonObjects.shared.showProgress()
+        
+        let urlString = buildUrlWithParameters(base: Base_Url, endpoint: endpoint, parameters: parameters)
+        
+        let obj = ApiRequest()
+        obj.delegate = self
+        obj.requestAPI(apiName: endpoint, apiRequestURL: urlString)
+    }
+    private func newsFeedDetailApi(newsFeedId: String) {
+        let parameters: [String: String] = [
+            "newsfeedid": "\(newsFeedId)"
+        ]
+        
+        makeApiRequest(endpoint: End_Points.Api_News_Feed_Detail.getEndpoints, parameters: parameters)
+    }
+
+   
+}
+extension NewsFeedDetailVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: AppStoryboards.dashboard.getDescription, bundle: .main)
+        if let showImgVc = storyboard.instantiateViewController(withIdentifier: AppViewControllerID.showImgVC.getIdentifier) as? ShowImgVC {
+            showImgVc.image = newsFeedDetailObj?.images?[indexPath.row].image
+            present(showImgVc, animated: true)
         }
     }
-}
-extension NewsFeedDetailVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return newsFeedDetailObj?.images?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let newsfeedCell = tableView.dequeueReusableCell(withIdentifier: AppTblCells.newsFeedImgCell.getIdentifier, for: indexPath) as! NewsfeedImageTblCell
-        
-        newsfeedCell.dateLabel.text = detailData?.newsFeedDate ?? ""
-        newsfeedCell.descriptionLabel.attributedText = processHTMLString(detailData?.newsDescription ?? "")
-        
-        newsfeedCell.newsfeedImgInfo = detailData
-        
-        
+        if let imageUrlString = newsFeedDetailObj?.images?[indexPath.row].image,
+           let encodedString = imageUrlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let imgURL = URL(string: encodedString) {
+            
+            newsfeedCell.newsFeedImg.kf.setImage(with: imgURL,placeholder: UIImage(named: "placeholderStImg"))
+        }
+       
         return newsfeedCell
     }
     
     
 }
+extension NewsFeedDetailVC: RequestApiDelegate {
+    func success(api: String, response: [String : Any]) {
+        if api == End_Points.Api_News_Feed_Detail.getEndpoints {
+            let status = response["status"] as? Int
+            if status == 1 {
+                if let cNewsFeedDetailDictData = Mapper<NewsFeedDetailModel>().map(JSONObject: response) {
+                 newsFeedDetailObj = cNewsFeedDetailDictData
+                    DispatchQueue.main.async {
+                        let htmlString = self.detailData?.newsDescription ?? ""
+                        let processedText = self.processHTMLString(htmlString)
+                        self.newsFeedDescription.attributedText = processedText
+                        self.newsFeedDescription.font = UIFont(name: AppFonts.Roboto_Regular, size: 13)
+                        self.newsFeedDate.text = self.detailData?.newsFeedDate
+                       
+                        self.imageTableView.reloadData()
+                        
+                    }
+                }
+                CommonObjects.shared.stopProgress()
+            } else {
+                DispatchQueue.main.async {
+                    CommonObjects.shared.stopProgress()
+                    CommonObjects.shared.showToast(message: AppMessages.MSG_NO_DATA_FOUND, controller: self)
+                }
+            }
+        }
+    }
+    
+    func failure() {
+        DispatchQueue.main.async {
+            CommonObjects.shared.stopProgress()
+            CommonObjects.shared.showToast(message: AppMessages.MSG_FAILURE_ERROR, controller: self)
+        }
+    }
+}
+
